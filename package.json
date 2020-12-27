@@ -1,0 +1,41 @@
+{
+  "name": "twitch_sheep",
+  "version": "1.0.0",
+  "author": "Hey24sheep (hey24sheep@gmail.com)",
+  "description": "Give your twitch chat the ability to control your home, obs, iot devices, lights, etc",
+  "main": "index.js",
+  "dependencies": {
+    "node-fetch": "^2.6.1",
+    "node-osc": "^5.2.1",
+    "obs-websocket-js": "^4.0.2",
+    "tmi.js": "^1.7.1"
+  },
+  "devDependencies": {
+    "@types/dotenv": "^8.2.0",
+    "@types/node": "^14.14.16",
+    "@types/node-fetch": "^2.5.7",
+    "@types/tmi.js": "^1.4.2",
+    "dotenv": "^8.2.0",
+    "http": "0.0.1-security",
+    "install": "^0.13.0",
+    "npm": "^6.14.10",
+    "tslint": "^5.12.1",
+    "typescript": "^3.3.3"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "cd src && tsc",
+    "start": "cd src && tsc && cd.. && cd out && node twitchsheep.js"
+  },
+  "keywords": [
+    "twitch",
+    "chat",
+    "control",
+    "irc",
+    "twitch bot",
+    "bot",
+    "twitch chat control",
+    "obs"
+  ],
+  "license": "MIT"
+}
