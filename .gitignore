@@ -14,9 +14,11 @@ lerna-debug.log*
 temp_chat_talk.txt
 /src/constants/options_personal.ts
 .env
+config.env
 
 #vs
 /.vscode
+/.vs
 
 #dependencies
 /node_modules

@@ -4,7 +4,18 @@ import * as nodeobsosc from "./nodeobsosc";
 export class OBSHandler {
     public constructor(private client: tmi.Client) { }
 
-    public helpObsComands(channel: string, commandName: string): void {
+    public handleCommand(command: string, channel: string) {
+        switch (command) {
+            case "!obsHelp":
+                this.helpObsComands(channel, command);
+                break;
+            default:
+                this.handleObsCommands(channel, command);
+                break;
+        }
+    }
+
+    private helpObsComands(channel: string, commandName: string): void {
         this.client.say(channel, "Some available commands are");
         this.client.say(channel, `"!scene scenenumber example : !scene 5",\n
         "!go : go to next scene",\n
@@ -13,7 +24,7 @@ export class OBSHandler {
         "!transition name duration : change my transition settings"`);
     }
 
-    public handleObsCommands(channel: string, commandName: string) {
+    private handleObsCommands(channel: string, commandName: string) {
         const obsCommandName = "/" + commandName.substr(1);
         const splits = obsCommandName.split(" ");
         nodeobsosc.handleObsCommands(splits);

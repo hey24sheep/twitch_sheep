@@ -1,13 +1,16 @@
 {
   "name": "twitch_sheep",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "author": "Hey24sheep (hey24sheep@gmail.com)",
   "description": "Give your twitch chat the ability to control your home, obs, iot devices, lights, etc",
   "main": "index.js",
   "dependencies": {
+    "@types/teslajs": "^4.7.1",
+    "ckey": "^1.0.2",
     "node-fetch": "^2.6.1",
     "node-osc": "^5.2.1",
     "obs-websocket-js": "^4.0.2",
+    "teslajs": "^4.9.6",
     "tmi.js": "^1.7.1"
   },
   "devDependencies": {

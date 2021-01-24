@@ -12,7 +12,8 @@
     "no-empty": false,
     "no-var-requires": false,
     "comment-format": false,
-    "trailing-comma": false
+    "trailing-comma": false,
+    "no-string-literal": false
   },
   "rulesDirectory": []
 }

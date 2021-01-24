@@ -1,7 +1,4 @@
-import dotenv from "dotenv";
-
-// initialize configuration
-dotenv.config();
+import ck from "ckey";
 
 export const options = {
   options: {
@@ -12,12 +9,8 @@ export const options = {
     reconnect: true,
   },
   identity: {
-    username: process.env.TWITCH_USERNAME,
-    password: process.env.TWITCH_PASSWORD,
-    clientId: process.env.TWITCH_CLIENTID,
-    clientSecret: process.env.TWITCH_CLIENTSECRET,
-    appName: process.env.TWITCHAPPNAME,
-    redirectUrl: process.env.TWITCHREDIRECTURL,
+    username: ck.TWITCH_USERNAME,
+    password: ck.TWITCH_PASSWORD,
   },
-  channels: [process.env.TWITCH_CHANNEL],
+  channels: [ck.TWITCH_CHANNEL],
 };
