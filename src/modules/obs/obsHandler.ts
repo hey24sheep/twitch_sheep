@@ -1,33 +1,45 @@
-import * as tmi from "tmi.js";
+import { stringify } from "querystring";
 import * as nodeobsosc from "./nodeobsosc";
 
 export class OBSHandler {
-    public constructor(private client: tmi.Client) { }
+    public constructor() { }
 
-    public handleCommand(command: string, channel: string) {
+    public handleCommand(command: string) {
+        let result: any;
         switch (command) {
             case "!obsHelp":
-                this.helpObsComands(channel, command);
+                result = this.helpObsComands();
                 break;
             default:
-                this.handleObsCommands(channel, command);
+                result = this.handleObsCommands(command);
                 break;
         }
+
+        // if undefined/null return null
+        if (!result) {
+            return null;
+        }
+
+        if (typeof result === "object") {
+            return stringify(result);
+        }
+
+        return result.toString();
     }
 
-    private helpObsComands(channel: string, commandName: string): void {
-        this.client.say(channel, "Some available commands are");
-        this.client.say(channel, `"!scene scenenumber example : !scene 5",\n
+    private helpObsComands() {
+        return `Some available commands are
+        \r\n "!scene scenenumber example : !scene 5",\n
         "!go : go to next scene",\n
         "!back : go to previous scene",\n
         "!toggleStudioMode : toggle obs studio mode",\n
-        "!transition name duration : change my transition settings"`);
+        "!transition name duration : change my transition settings"`;
     }
 
-    private handleObsCommands(channel: string, commandName: string) {
+    private handleObsCommands(commandName: string) {
         const obsCommandName = "/" + commandName.substr(1);
         const splits = obsCommandName.split(" ");
-        nodeobsosc.handleObsCommands(splits);
-        return;
+        const result = nodeobsosc.handleObsCommands(splits);
+        return result;
     }
 }

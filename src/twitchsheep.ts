@@ -38,18 +38,12 @@ function onMessageHandler(channel: string,
     userstate: tmi.ChatUserstate,
     message: string,
     self: boolean): void {
-    console.log("msg recieved");
-    // Remove whitespace from chat message
-    const command = message.trim();
-
-    if (self
-        || !commandHandler.isValidCommand(command)) {
+    if (self) {
+        // Ignore messages from self
         return;
-    } // Ignore messages from the bot
-
-    console.log("Userstate : ", userstate);
-    console.log("Channel : ", channel);
-    commandHandler.handleCommand(channel, command);
+    }
+    console.log("Userstate : ", userstate, "Channel : ", channel);
+    commandHandler.handleCommand(channel, message.trim());
 }
 
 // Called every time the bot connects to Twitch chat

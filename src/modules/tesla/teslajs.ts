@@ -4,15 +4,13 @@ import * as tjs from "teslajs";
 import { teslaCommands } from "./tesla_commands";
 
 export class TeslaHandler {
+  private lastCommandTime: Date;
   private tokenResponse: tjs.TokenResponse;
   public constructor() {
     this.login();
   }
 
   public async handleCommand(command: string) {
-    if (!this.tokenResponse) {
-      this.login();
-    }
     command = command.substr(1);
     const splits = command.split(" ");
     let carIndex: number;
@@ -20,7 +18,10 @@ export class TeslaHandler {
       carIndex = parseInt(splits[1], 10);
     }
     let result: any;
-
+    const timeoutVal = this.isTimeout();
+    if (timeoutVal && splits[0] !== "tesla") {
+      return timeoutVal;
+    }
     switch (splits[0]) {
       case "tesla":
         result = await this.teslaHelp();
@@ -51,11 +52,30 @@ export class TeslaHandler {
       return null;
     }
 
+    if (splits[0] !== "tesla") {
+      // valid command set timeout
+      this.lastCommandTime = new Date();
+    }
+
     if (typeof result === "object") {
       return stringify(result);
     }
 
     return result.toString();
+  }
+
+  private isTimeout() {
+    if (this.lastCommandTime) {
+      const curr = new Date();
+
+      // 5 min
+      const FIVE_MIN = 5 * 60 * 1000;
+
+      if ((curr.valueOf() - this.lastCommandTime.valueOf()) < FIVE_MIN) {
+        return "You need to wait for 5 mins before your next command";
+      }
+    }
+    return null;
   }
 
   private async teslaHelp() {
@@ -133,6 +153,9 @@ export class TeslaHandler {
   }
 
   private async vehicle(carIdx?: number) {
+    if (!this.tokenResponse) {
+      this.login();
+    }
     // will return the first car always
     const options: tjs.optionsType = {
       authToken: this.tokenResponse.authToken,

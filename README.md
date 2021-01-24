@@ -16,11 +16,11 @@ Other projects to control single specific thing:-
 
 ## Features / Future
 
-- [x] Let chat control your **Tesla** 😆 (built using https://github.com/mseminatore/TeslaJS) (**READ DISCLAIMER**) 
-  - Commands like !vehiclestate
-  - !honkhorn
-  - !startcharge
-  - !stopcharge
+- [x] Let chat control your **Tesla** 😆 (built using github.com/mseminatore/TeslaJS) (**READ DISCLAIMER**) 
+  - Commands like !vehiclestate <car_index>
+  - !honkhorn <car_index>
+  - !startcharge <car_index> like !startcharge 2
+  - !stopcharge <car_index>
   - !flashlights, etc
 - [x] OBS (scenes + scene switch + transitions) (non-destructive only)
   - !scene scenenumber example : !scene 5

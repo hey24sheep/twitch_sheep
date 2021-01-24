@@ -69,7 +69,6 @@ oscServer.on("listening", () => {
 
 //OSC -> OBS
 export function handleObsCommands(msg: any[]) {
-    console.log("OBS Command Rec", msg);
     //Trigger Scene by Index Number
     if (msg.length > 0
         && msg[0] === "/scene") {
@@ -226,7 +225,7 @@ export function handleObsCommands(msg: any[]) {
 
     //Log Error
     else {
-        console.log("Error: Invalid OSC command. Please refer to Node OBSosc on Github for Command List")
+        return null;
     }
 }
 
